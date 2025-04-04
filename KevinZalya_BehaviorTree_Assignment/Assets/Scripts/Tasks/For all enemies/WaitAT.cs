@@ -5,15 +5,14 @@ using UnityEngine;
 
 namespace NodeCanvas.Tasks.Actions {
 
-	public class ShootAT : ActionTask {
+	public class WaitAT : ActionTask {
 
-		public GameObject bullet;
-		public GameObject player;
-		public Vector3 playerPosition;
+        public float time;
+        public float bulletTime;
 
-		//Use for initialization. This is called only once in the lifetime of the task.
-		//Return null if init was successfull. Return an error string otherwise
-		protected override string OnInit() {
+        //Use for initialization. This is called only once in the lifetime of the task.
+        //Return null if init was successfull. Return an error string otherwise
+        protected override string OnInit() {
 			return null;
 		}
 
@@ -22,22 +21,18 @@ namespace NodeCanvas.Tasks.Actions {
 		//EndAction can be called from anywhere.
 		protected override void OnExecute() {
 
-			Debug.Log("shot");
 			
-			Transform bulletTFM = Object.Instantiate(bullet, agent.transform.position, Quaternion.identity).transform;
-
-			Debug.DrawLine(agent.transform.position, player.transform.position, Color.red);
-			
-
-			bullet.transform.position = playerPosition;
-
-			EndAction(true);
 		}
 
 		//Called once per frame while the action is active.
 		protected override void OnUpdate() {
-
-
+			
+			time += Time.deltaTime;
+			if(time >= bulletTime)
+			{
+				time = 0;
+				EndAction(true);
+			}
 		}
 
 		//Called when the task is disabled.
