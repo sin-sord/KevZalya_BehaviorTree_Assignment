@@ -9,6 +9,8 @@ namespace NodeCanvas.Tasks.Actions {
 
 		public GameObject bullet;
 		public GameObject player;
+		public GameObject spawned;
+		public Transform bulletSpawnPosition;
 		public Vector3 playerPosition;
 
 		//Use for initialization. This is called only once in the lifetime of the task.
@@ -17,19 +19,24 @@ namespace NodeCanvas.Tasks.Actions {
 			return null;
 		}
 
-		//This is called once each time the task is enabled.
-		//Call EndAction() to mark the action as finished, either in success or failure.
-		//EndAction can be called from anywhere.
+
 		protected override void OnExecute() {
 
 			Debug.Log("shot");
-			
-			Transform bulletTFM = Object.Instantiate(bullet, agent.transform.position, Quaternion.identity).transform;
 
-			Debug.DrawLine(agent.transform.position, player.transform.position, Color.red);
+			//On this line, we're creating an instance of the bullet prefab
+			//We're storing a reference to the spawned gameobject in "spawned" (the GameObject variable on this script)
+			spawned = GameObject.Instantiate(bullet, bulletSpawnPosition.transform.position, Quaternion.identity);
+
+			//We're pulling the bulletMovement script off of the spawned bullet
+            bulletMovement bulletTest = spawned.GetComponent<bulletMovement>();
+
+			//Setting the player's position on the bulletMovement script so that it can move in the direction of the player
+			bulletTest.player = player.transform.position;
+            Debug.DrawLine(agent.transform.position, player.transform.position, Color.red);
 			
 
-			bullet.transform.position = playerPosition;
+			//bullet.transform.position = playerPosition;
 
 			EndAction(true);
 		}
