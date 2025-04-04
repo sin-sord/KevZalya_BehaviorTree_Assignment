@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace NodeCanvas.Tasks.Actions {
 
-	public class ShootAT : ActionTask {
+	public class ChargeAT : ActionTask {
 
-		public GameObject bullet;
-		public GameObject player;
-		public Vector3 playerPosition;
+        public BBParameter<Transform> currnetTarget;
+
+        public float speed;
 
 		//Use for initialization. This is called only once in the lifetime of the task.
 		//Return null if init was successfull. Return an error string otherwise
@@ -22,15 +22,11 @@ namespace NodeCanvas.Tasks.Actions {
 		//EndAction can be called from anywhere.
 		protected override void OnExecute() {
 
-			Debug.Log("shot");
-			
-			Transform bulletTFM = Object.Instantiate(bullet, agent.transform.position, player.transform.rotation).transform;
 
+            Vector3 directionToMoveTo = currnetTarget.value.position - agent.transform.position;
+            agent.transform.position += directionToMoveTo.normalized * speed * Time.deltaTime;
 
-
-			bullet.transform.position = playerPosition;
-
-			EndAction(true);
+            EndAction(true);
 		}
 
 		//Called once per frame while the action is active.
