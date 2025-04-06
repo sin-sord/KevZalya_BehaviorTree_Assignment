@@ -23,7 +23,7 @@ namespace NodeCanvas.Tasks.Actions {
 
 			meshRenderer.material.color = changeColorTo;
 			
-			//EndAction(true);
+			EndAction(true);
 		}
 
 		//Called once per frame while the action is active.
