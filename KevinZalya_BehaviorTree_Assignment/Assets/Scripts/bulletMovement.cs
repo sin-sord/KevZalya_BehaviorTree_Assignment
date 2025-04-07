@@ -5,13 +5,16 @@ using UnityEngine.Timeline;
 
 public class bulletMovement : MonoBehaviour
 {
+    [Header("Bullet Direction")]
     public float speed;
     public Vector3 player;
     Vector3 direction;
+
+    [Header("Bullet Time")]
     public float time;
     public float bulletTime;
 
-    // Update is called once per frame
+   
     void Update()
     {
         time += Time.deltaTime;
@@ -24,8 +27,18 @@ public class bulletMovement : MonoBehaviour
     void bulletLifeTime()
     {
         //once bullet time is reached then destroy the bullet object
-        if(time >= bulletTime)
+        if (time >= bulletTime)
         {
+            Destroy(gameObject);
+        }
+
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == ("Player"))
+        {
+            collision.gameObject.GetComponent<Movement>().healthAmount -= 15;
             Destroy(gameObject);
         }
         

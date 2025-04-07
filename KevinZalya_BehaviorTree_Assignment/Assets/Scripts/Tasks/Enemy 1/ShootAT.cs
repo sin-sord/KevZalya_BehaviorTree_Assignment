@@ -9,7 +9,7 @@ namespace NodeCanvas.Tasks.Actions {
 
 		public GameObject bullet;
 		public GameObject player;
-		public GameObject spawned;
+		GameObject spawned;
 		public Transform bulletSpawnPosition;
 		public Vector3 playerPosition;
 
