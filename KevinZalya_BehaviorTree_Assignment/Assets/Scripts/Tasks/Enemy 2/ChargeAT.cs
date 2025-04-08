@@ -25,7 +25,7 @@ namespace NodeCanvas.Tasks.Actions {
 
             Vector3 directionToMoveTo = currnetTarget.value.position - agent.transform.position;
             agent.transform.position += directionToMoveTo.normalized * speed * Time.deltaTime;
-
+			Debug.DrawLine(agent.transform.position, currnetTarget.value.position, Color.red);
             EndAction(true);
 		}
 

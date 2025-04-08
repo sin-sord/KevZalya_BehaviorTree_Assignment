@@ -10,13 +10,14 @@ public class Movement : MonoBehaviour
     float amount;
     public Transform spawnPosition;
 
-
-
     [Header("Movement")]
     public float movementSpeed;
     float xMovement;
     float zMovement;
     CharacterController ch;
+    public float dashSpeed;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,7 @@ public class Movement : MonoBehaviour
         zMovement = Input.GetAxis("Vertical") * movementSpeed * Time.deltaTime;
         ch.Move(new Vector3(xMovement, 0, zMovement));
         healthOfPlayer();
+        dashing();
     }
 
     void healthOfPlayer()
@@ -46,6 +48,15 @@ public class Movement : MonoBehaviour
             healthAmount = 100;
         }
 
+    }
+
+    void dashing()
+    {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            xMovement = Input.GetAxis("Horizontal") * movementSpeed * dashSpeed * Time.deltaTime;
+            zMovement = Input.GetAxis("Vertical") * movementSpeed * dashSpeed * Time.deltaTime;
+        }
     }
 }
 

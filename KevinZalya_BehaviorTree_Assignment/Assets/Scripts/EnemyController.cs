@@ -6,11 +6,8 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     public Transform enemy1;
-    public Transform enemy2;
-
+    public GameObject enemy2;
     public Transform player;
-
-    public MeshRenderer enemy1Mesh;
     public MeshRenderer enemy2Mesh;
     public Color changeColorTo;
 
@@ -19,6 +16,7 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerDetected = false;
         changeColorTo = Color.green;
     }
 
@@ -33,9 +31,9 @@ public class EnemyController : MonoBehaviour
         if(Vector3.Distance(enemy1.transform.position, player.transform.position) < 5)
         {
             playerDetected = true;
-            changeColorTo = Color.red;
+            
         }
-        changeColorTo = Color.red;
+        
 
     }
 }
