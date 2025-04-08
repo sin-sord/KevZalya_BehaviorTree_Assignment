@@ -5,19 +5,22 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public Transform enemy1;
-    public GameObject enemy2;
-    public Transform player;
-    public MeshRenderer enemy2Mesh;
-    public Color changeColorTo;
 
+    [Header("Detection")]
+    public GameObject enemy1;
+    public Transform player;
     public bool playerDetected;
+
+    [Header("Enemy Color")]
+    public GameObject enemy2;
+    public MeshRenderer enemy2Mesh;
+    public Color alertColor;
+
 
     // Start is called before the first frame update
     void Start()
     {
         playerDetected = false;
-        changeColorTo = Color.green;
     }
 
     // Update is called once per frame
@@ -28,12 +31,14 @@ public class EnemyController : MonoBehaviour
 
     void detectedPlayer()
     {
-        if(Vector3.Distance(enemy1.transform.position, player.transform.position) < 5)
+        //  if enemy1 and the player are within the set distance...
+        if (Vector3.Distance(enemy1.transform.position, player.transform.position) < 15)
         {
+            // change the color to red
+            Debug.Log("Detected player");
             playerDetected = true;
-            
+            alertColor = Color.red;
+            enemy2Mesh.material.color = alertColor;
         }
-        
-
     }
 }
