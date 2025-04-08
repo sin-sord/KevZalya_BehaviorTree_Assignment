@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Timeline;
+using TMPro;
 
 public class bulletMovement : MonoBehaviour
 {
@@ -14,10 +15,11 @@ public class bulletMovement : MonoBehaviour
     public float time;
     public float bulletTime;
 
-   
     void Update()
     {
+        // startes the timer for how long the bullet will last
         time += Time.deltaTime;
+
         //setting the direciton of the where the bullet is going
         direction = (player - transform.position);
         transform.position += direction * speed * Time.deltaTime;
@@ -36,11 +38,12 @@ public class bulletMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        // if the the bullet collides with an object with the Player tag then decrease that objects health
         if (collision.gameObject.tag == ("Player"))
         {
-            collision.gameObject.GetComponent<Movement>().healthAmount -= 15;
+            collision.gameObject.GetComponent<Movement>().healthAmount -= 10;
             Destroy(gameObject);
         }
-        
+
     }
 }
