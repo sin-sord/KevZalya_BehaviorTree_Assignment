@@ -41,7 +41,7 @@ public class bulletMovement : MonoBehaviour
         // if the the bullet collides with an object with the Player tag then decrease that objects health
         if (collision.gameObject.tag == ("Player"))
         {
-            collision.gameObject.GetComponent<Movement>().healthAmount -= 10;
+            collision.gameObject.GetComponent<Movement>().healthAmount -= 20;
             Destroy(gameObject);
         }
 

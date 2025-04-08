@@ -1,22 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
     [Header("Health")]
-    public int healthAmount;
-    float amount;
+    public float healthAmount;
+    public float maxHealth;
     public Transform spawnPosition;
+    bool playerDied;
 
     [Header("Movement")]
     public float movementSpeed;
     float xMovement;
     float zMovement;
     CharacterController ch;
-    public float dashSpeed;
-
 
 
     // Start is called before the first frame update
@@ -24,8 +24,8 @@ public class Movement : MonoBehaviour
     {
         transform.position = spawnPosition.transform.position;
         ch = GetComponent<CharacterController>();
-
-        healthAmount = 100;
+        playerDied = false;
+        healthAmount = maxHealth;
     }
 
     // Update is called once per frame
@@ -35,18 +35,25 @@ public class Movement : MonoBehaviour
         xMovement = Input.GetAxis("Horizontal") * movementSpeed * Time.deltaTime;
         zMovement = Input.GetAxis("Vertical") * movementSpeed * Time.deltaTime;
         ch.Move(new Vector3(xMovement, 0, zMovement));
-        healthOfPlayer();
+
+        resetPlayerPosition();
     }
 
-    void healthOfPlayer()
+    void resetPlayerPosition()
     {
         //  if the healh of the player reaches 0 reset their position to spawn
-        if (healthAmount <= 0)
+        if (healthAmount < 0)
         {
+            Debug.Log("player died!");
+            playerDied = true;
             transform.position = spawnPosition.transform.position;
-            healthAmount = 100;
-        }
 
+            if (playerDied == true)
+            {
+                playerDied = false;
+                healthAmount = maxHealth;
+            }
+        }
     }
 
 }
