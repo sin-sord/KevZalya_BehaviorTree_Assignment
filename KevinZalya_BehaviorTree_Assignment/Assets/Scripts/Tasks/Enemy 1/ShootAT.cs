@@ -34,8 +34,8 @@ namespace NodeCanvas.Tasks.Actions {
 			//Setting the player's position on the bulletMovement script so that it can move in the direction of the player
 			bulletTest.player = player.transform.position;
             Debug.DrawLine(agent.transform.position, player.transform.position, Color.red);
-			
 
+			agent.transform.LookAt(player.transform.position);
 			//bullet.transform.position = playerPosition;
 
 			EndAction(true);
