@@ -2,23 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameOver : MonoBehaviour
 {
-    public GameObject gameOverText;
     public GameObject player;
 
     private void Start()
     {
-        gameOverText.SetActive(false);
+       
     }
 
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Game Over!");
-        gameOverText.SetActive(true);
-
+    
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextSceneIndex = (currentSceneIndex + 1) % SceneManager.sceneCountInBuildSettings;
+        SceneManager.LoadScene(nextSceneIndex);  // loads the next scene
     }
-
 }
