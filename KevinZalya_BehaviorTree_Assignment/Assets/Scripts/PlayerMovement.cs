@@ -44,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log("player died!");
 
+            // when the player dies then it goes to the "Game Over" scene
             transform.position = spawnPosition.transform.position;
             int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
             int nextSceneIndex = (currentSceneIndex + 1) % SceneManager.sceneCountInBuildSettings;

@@ -29,6 +29,7 @@ namespace NodeCanvas.Tasks.Actions {
 		//Called once per frame while the action is active.
 		protected override void OnUpdate() {
 
+			// waits until the time is past or equal to max, then ends the task
 			agent.transform.LookAt(currentTarget.value.position);
 			time += Time.deltaTime;
 			if(time >= maxTime)

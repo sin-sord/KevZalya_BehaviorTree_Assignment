@@ -21,6 +21,7 @@ namespace NodeCanvas.Tasks.Actions {
 		//EndAction can be called from anywhere.
 		protected override void OnExecute() {
 
+			// changes color when player is near
 			meshRenderer.material.color = changeColorTo;
 			
 			EndAction(true);
