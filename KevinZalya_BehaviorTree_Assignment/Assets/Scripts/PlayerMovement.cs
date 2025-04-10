@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -35,23 +34,20 @@ public class PlayerMovement : MonoBehaviour
         zMovement = Input.GetAxis("Vertical") * movementSpeed * Time.deltaTime;
         ch.Move(new Vector3(xMovement, 0, zMovement));
 
-        resetPlayerPosition();
+        playerHasDied();
     }
 
-    void resetPlayerPosition()
+    void playerHasDied()
     {
         //  if the healh of the player reaches 0 reset their position to spawn
-        if (healthAmount < 0)
+        if (healthAmount <= 0)
         {
             Debug.Log("player died!");
-            playerDied = true;
-            transform.position = spawnPosition.transform.position;
 
-            if (playerDied == true)
-            {
-                playerDied = false;
-                healthAmount = maxHealth;
-            }
+            transform.position = spawnPosition.transform.position;
+            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            int nextSceneIndex = (currentSceneIndex + 1) % SceneManager.sceneCountInBuildSettings;
+            SceneManager.LoadScene(nextSceneIndex);  // loads the next scene
         }
     }
 }

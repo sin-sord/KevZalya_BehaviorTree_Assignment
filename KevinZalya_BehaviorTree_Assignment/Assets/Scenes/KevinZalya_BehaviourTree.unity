@@ -2934,7 +2934,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fac7aa72412dbf84596f6716ad6988c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthAmount: 0
+  healthAmount: 100
   maxHealth: 100
   spawnPosition: {fileID: 1715638469}
   movementSpeed: 7
