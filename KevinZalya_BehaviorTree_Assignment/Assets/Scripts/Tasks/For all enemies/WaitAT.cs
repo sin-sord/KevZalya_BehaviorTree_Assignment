@@ -8,6 +8,7 @@ namespace NodeCanvas.Tasks.Actions {
 
 	public class WaitAT : ActionTask {
 
+        public BBParameter<Transform> currentTarget;
         public float time;
         public float maxTime;
 
@@ -27,7 +28,8 @@ namespace NodeCanvas.Tasks.Actions {
 
 		//Called once per frame while the action is active.
 		protected override void OnUpdate() {
-			
+
+			agent.transform.LookAt(currentTarget.value.position);
 			time += Time.deltaTime;
 			if(time >= maxTime)
 			{

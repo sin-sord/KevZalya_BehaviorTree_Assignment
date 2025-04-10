@@ -6,22 +6,19 @@ using UnityEngine.UI;
 
 public class GameOver : MonoBehaviour
 {
-    public TextMeshProUGUI textMesh;
+    public GameObject gameOverText;
     public GameObject player;
 
     private void Start()
     {
-        textMesh = GetComponent<TextMeshProUGUI>();
+        gameOverText.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Game Over!");
-        if (other.gameObject.CompareTag("Player"))
-        {
-            textMesh.text = "You've reached the exit!";
-            textMesh.color = Color.green;
-        }
+        gameOverText.SetActive(true);
+
     }
 
 }
