@@ -34,7 +34,7 @@ public class EnemyController : MonoBehaviour
         //  if enemy1 and the player are within the set distance...
         if (Vector3.Distance(enemy1.transform.position, player.transform.position) < 10)
         {
-            // change the color to red
+            // change the color to red for enemy2
             Debug.Log("Detected player");
             playerDetected = true;
             alertColor = Color.red;
